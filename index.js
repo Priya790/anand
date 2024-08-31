@@ -6,10 +6,9 @@ const Register = require('./models/registerSchema');
 const app = express();
 const port = 3000;
 
-mongoose.connect('mongodb+srv://strange99:zieUyS!zt9kL7JG@strange99.fnr7h.mongodb.net/', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect('mongodb+srv://strange99:zieUyS!zt9kL7JG@strange99.fnr7h.mongodb.net/')
+  .then(() => console.log('MongoDB connected successfully'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 app.use(bodyParser.json());
 
