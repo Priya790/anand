@@ -13,15 +13,17 @@ mongoose.connect('mongodb+srv://strange99:zieUyS!zt9kL7JG@strange99.fnr7h.mongod
 app.use(bodyParser.json());
 
 app.post('/person', async (req, res) => {
-  try {
-    const { number, password, email, type } = req.body;
-    const person = new Register({ number, password, email, type });
-    await person.save();
-    res.status(201).json({ message: 'Person registered successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Error registering person', error });
-  }
-});
+    try {
+      const { number, password, email, type } = req.body;
+      const person = new Register({ number, password, email, type });
+      await person.save();
+      res.status(201).json({ message: 'Person registered successfully' });
+    } catch (error) {
+      console.error('Error details:', error); // Log the full error
+      res.status(500).json({ message: 'Error registering person', error: error.message });
+    }
+  });
+  
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
